@@ -39,7 +39,7 @@ multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
 
   - If multiqc gives you a python error, run the following lines:
   - ```
-    /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-            jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m ensurepip --default-pip
+    /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m ensurepip --default-pip
 
     /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --upgrade pip
 
