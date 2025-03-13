@@ -17,7 +17,7 @@ README.md                       filt_stats.qza       multiqc_mock.html          
 ```
 - If you do, you may start at the **Denoising reads** section, step 4.
 - If you do NOT, you may start with **Quality control**
-
+---
 # Quality Control (QC)
 1. Create a symlink to the data like this, yup, you not always have to copy or move files around!
 ```
@@ -45,7 +45,19 @@ multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
 
     /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --user multiqc
 ```
-
+5. Add, commit and push file to week-7-repository.
+```
+git add "multiqc_raw_data.html"
+git commit -m "Adding multiqc results"
+git push origin main
+```
+  - (**OPTIONAL**) If you get an error due to remote changes, rebase changes:
+  ```
+  git pull origin main --rebase
+  ```
+6. Go to web browser github and download `multiqc_raw_data.html`
+7. Open file in web browser
+---
 ## Let's run Quimme to study the microbiome
 1. Create a Symlink for the metadata file from the share folder
 ```
@@ -55,8 +67,7 @@ ln -s /ocean/projects/agr250001p/shared/week-7-data/Blueberry_metadata_reduced.t
 ```         
 head Blueberry_metadata_reduced.tsv
 ```
-- Answer questions 11 and 12
-
+---
 ## A few formatting steps required by quimme
 1. Let's create the following directory
 ```         
@@ -64,10 +75,11 @@ mkdir reads_qza
 ```
 2. You had installed the latest version of QIIME2, so you can either activate that environment with the command below.
 
-```         
+```
+module load anaconda 3        
 conda activate qiime2-amplicon-2024.2
 ```
-- When you are finished this tutorial you can deactivate the environment using:
+- When you are finished with this tutorial you can deactivate the environment using:
 
 ```         
 conda deactivate
@@ -82,7 +94,7 @@ qiime tools import \
 ```
 - cassava format, files follow a pattern `SampleID_L001_R1_001.fastq.gz`
 
-4. remove primer sequences from reads
+4. remove primer sequences from reads, these are the primers used to enrich for a specific locus, e.g.:16S, COI, etc
 ```
 qiime cutadapt trim-paired \
   --i-demultiplexed-sequences reads_qza/reads.qza \
@@ -93,13 +105,20 @@ qiime cutadapt trim-paired \
   --p-no-indels \
   --o-trimmed-sequences reads_qza/reads_trimmed.qza
 ```
-5 Visualize your data now
+5. Visualize your data now
 ```         
 qiime demux summarize \
   --i-data reads_qza/reads_trimmed.qza \
   --o-visualization reads_qza/reads_trimmed_summary.qzv
 ```
-- Git add, commit and push `reads_trimmed_summary.qzv` Download and open in https://view.qiime2.org/
+- Add, commit and push `reads_qza/reads_trimmed_summary.qzv` to git
+```
+git add "reads_qza/reads_trimmed_summary.qzv"
+git commit -m "Adding reads summary results"
+git push origin main
+```
+- Download and open `reads_trimmed_summary.qzv` in https://view.qiime2.org/
+---
 
 ### Denoising reads
 1. Join pair-end reds
@@ -121,8 +140,8 @@ qiime demux summarize \
   --i-data reads_qza/reads_trimmed_joined_filt.qza \
   --o-visualization reads_qza/reads_trimmed_joined_filt_summary.qzv
 ```
-- Git add, commit and push `reads_trimmed_joined_filt.qzv` Download and open in https://view.qiime2.org/
-- Answer question 13
+- Add, commit and push `reads_qza/reads_trimmed_joined_filt.qzv` to Git
+- Download and open in https://view.qiime2.org/
 
 4. Actual denoising with deblur
 
@@ -143,31 +162,38 @@ qiime feature-table summarize \
   --i-table deblur_output/table.qza \
   --o-visualization deblur_output/deblur_table_summary.qzv
 ```
-- Git add, commit and push `deblur_table_summary.qzv` Download and open in https://view.qiime2.org/
+- Add, commit and push `deblur_output/deblur_table_summary.qzv` to Git
+- Download and open in https://view.qiime2.org/
+- Answer questions 1-7
 
 ###  Run taxonomic classification
 1. Create symlink to taxonomic data
 ```
 ln -s /ocean/projects/agr250001p/shared/week-7-data/taxa .
 ```
-2. Run taxonomic classification (Homework)
-```         
+2. **(OPTIONAL)** Run taxonomic classification.
+```
+Download database to compare to
+wget https://data.qiime2.org/2023.9/common/silva-138-99-nb-classifier.qza
+
+  
 qiime feature-classifier classify-sklearn \
   --i-reads deblur_output/representative_sequences.qza \
-  --i-classifier /ocean/projects/agr250001p/shared/week-7-data/silva-138-99-nb-classifier.qza \
+  --i-classifier silva-138-99-nb-classifier.qza \
   --p-n-jobs 4 \
   --output-dir taxa
 ```
+---
 ### Filtering resultant table
 1. Filter out rare ASVs
 ```         
 qiime feature-table filter-features \
   --i-table deblur_output/table.qza \
-  --p-min-frequency 10 \
+  --p-min-frequency 3 \
   --p-min-samples 1 \
   --o-filtered-table deblur_output/deblur_table_filt.qza
 ```
-- replace X with desired frequency
+- replace 6 with desired frequency and observe the changes. Answer question 8
 2. Filter out contaminant and unclassified ASVs
 ```         
 qiime taxa filter-table \
@@ -184,7 +210,7 @@ qiime feature-table summarize \
   --o-visualization deblur_output/deblur_table_filt_contam_summary.qzv
 ```
 - Git add, commit and push `deblur_table_filt_contam_summary.qzv` Download and open in https://view.qiime2.org/
-- Answer question 16 What is the minimum and maximum sequencing depth across all samples?
+- Answer question 9 What is the maximum sequencing depth across all samples?
 
 4. Copy final table to current directory
 ```         
@@ -205,7 +231,7 @@ qiime feature-table summarize \
 
 - Git add, commit and push `deblur_table_final_summary.qzv` Download and open in https://view.qiime2.org/
 
-# VISUALIZATION
+# VISUALIZATION (Homework)
 1. This is a phylogenetic tree I pre-generated, please create a symlink
 ```         
 ln -s /ocean/projects/agr250001p/shared/week-7-data/asvs-tree.qza .
