@@ -44,7 +44,7 @@ multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
     /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --upgrade pip
 
     /jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --user multiqc
-```
+
 5. Add, commit and push file to week-7-repository.
 ```
 git add "multiqc_raw_data.html"
