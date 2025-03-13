@@ -189,7 +189,7 @@ qiime feature-classifier classify-sklearn \
 ```         
 qiime feature-table filter-features \
   --i-table deblur_output/table.qza \
-  --p-min-frequency 3 \
+  --p-min-frequency 2 \
   --p-min-samples 1 \
   --o-filtered-table deblur_output/deblur_table_filt.qza
 ```
