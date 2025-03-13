@@ -120,7 +120,7 @@ git push origin main
 - Download and open `reads_trimmed_summary.qzv` in https://view.qiime2.org/
 ---
 
-### Denoising reads
+# Denoising reads
 1. Join pair-end reds
 ```         
 qiime vsearch merge-pairs \
