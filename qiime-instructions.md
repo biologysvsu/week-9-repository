@@ -1,6 +1,7 @@
 # IMPORTANT: This tutorial assumes you have already installed multiqc and qiime, if not, follow the installation steps in `week-7-repository` -> `microbiome-instructions.md`
-# Go to the right working directory
-1. Go to your ocean folder using your alias
+
+## Go to the right working directory
+1. Go to your ocean folder using your alias. If you dont have an alias, cd the long way `cd /ocean/projects/agr250001p/your-username`
 ```
 myocean
 ```
@@ -14,68 +15,10 @@ Blueberry_metadata_reduced.tsv  fastqc_mock_out      microbiome-instructions.md 
 MultiQC                         fastqc_raw_data_out  mock-data                   raw_data
 README.md                       filt_stats.qza       multiqc_mock.html           reads_qza
 ```
+- If you do, you may start at the **Denoising reads** section, step 4.
+- If you do NOT, you may start with **Quality control**
 
-# Organize repository into folders
-- Make sure your current directory `pwd` is
-/ocean/projects/agr250001/your-username/week-7-repository
-1. Create a folder `raw-data` by using the `mkdir` command
-```
-mkdir mock-data
-```
-2. cd into the newly created folder and download the data
-```
-cd mock-data
-wget https://www.ibdmdb.org/downloads/raw/HMP2/16S/2018-01-08/206534.fastq.gz
-wget https://www.ibdmdb.org/downloads/raw/HMP2/16S/2018-01-08/206536.fastq.gz
-wget https://www.ibdmdb.org/downloads/raw/HMP2/16S/2018-01-08/206538.fastq.gz
-```
-3. Unzip the data. Note that sometimes when we run bioinformatics programs they can uncompress the files within the program, but other times we need to uncompress (unzip) them first.
-
-```
-gunzip *.fastq.gz
-```
-
-4. Use `less` to scroll through the file, and remember to press `q` when you want to stop looking at the file.
-```
-less 206534.fastq
-```
-
-## We will first perform quality control (QC) on our data
-1. First we’ll be running fastqc, and to do that, we’ll first make a directory for the output to go:
-```
-cd .. #Goes one directory back (up one level)
-mkdir fastqc_mock_out
-```
-2. Load required module (Loads the program/software you will use)
-```
-module load FastQC
-```
-3. Now we’ll run fastqc
-```
-fastqc -t 4 mock-data/*.fastq -o fastqc_mock_out
-```
-The arguments that we’re giving fastqc are:
-
-- -t 4: the number of threads to use. Sometimes “threads” will be shown as --threads, --cpus, --processors, --nproc, or similar. Basically, developers of packages can call things whatever they like, but you can use the help documentation to see what options are available. We’re using 4 here because that’s the maximum that we have available. See below (htop) for how we find out about how many we have available.
-- mock-data/*.fastq: the fastq files that we want to check the quality of.
-- -o fastqc_mock_out: the folder to save the output to.
-
-4. Next we’ll run multiqc. The name suggests it might be performing QC on multiple files, but it’s actually for combining the output together of multiple files, so we can run it like this:
-
-```
-multiqc fastqc_mock_out --filename multiqc_mock.html
-```
-So we’ve given as arguments:
-
-- fastqc_mock_out: the folder that contains the fastqc output.
-- --filename multiqc_mock.html: the file name to save the output as.
-
-## Visualize QC file and answer the questions.
-1. Add, Commit and Push multiqc_mock.html to your GitHub repository.
-2.Download file and doeble click to open in web browser.
-
-
-# NOW LET'S CARRY OUT QC ON REAL DATA!
+# Quality Control (QC)
 1. Create a symlink to the data like this, yup, you not always have to copy or move files around!
 ```
 ln -s /ocean/projects/agr250001p/shared/week-7-data/raw_data .
@@ -86,11 +29,21 @@ mkdir fastqc_raw_data_out
 ```
 3. Run fastqc
 ```
+module load FastQC
 fastqc -t 4 raw_data/*.fastq.gz -o fastqc_raw_data_out
 ```
 4. Run multiqc
 ```
-multiqc fastqc_raw_data_out --filename multiqc_raw_data.html
+multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
+```
+
+  -If multiqc gives you a python error, run the following lines:
+  ```
+/jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m ensurepip --default-pip
+
+/jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --upgrade pip
+
+/jet/packages/spack/opt/spack/linux-centos8-zen2/gcc-10.2.0/python-3.8.6-jaihmn5fofhkpkdsskfz25ez6s2camcf/bin/python3 -m pip install --user multiqc
 ```
 
 ## Let's run Quimme to study the microbiome
@@ -105,7 +58,7 @@ head Blueberry_metadata_reduced.tsv
 - Answer questions 11 and 12
 
 ## A few formatting steps required by quimme
-1. Lwt's create the following directory
+1. Let's create the following directory
 ```         
 mkdir reads_qza
 ```
@@ -170,6 +123,7 @@ qiime demux summarize \
 ```
 - Git add, commit and push `reads_trimmed_joined_filt.qzv` Download and open in https://view.qiime2.org/
 - Answer question 13
+
 4. Actual denoising with deblur
 
 ```         
@@ -183,7 +137,7 @@ qiime deblur denoise-16S \
 ```
 - Note: this command may take up to 10 minutes or so to run.
 
-4. Summarize dublur output
+5. Summarize dublur output
 ```         
 qiime feature-table summarize \
   --i-table deblur_output/table.qza \
