@@ -1,3 +1,4 @@
+# IMPORTANT: This tutorial assumes you have already installed multiqc and qiime, if not, follow the installation steps in `week-7-repository` -> `microbiome-instructions.md`
 # Go to the right working directory
 1. Go to your ocean folder using your alias
 ```
