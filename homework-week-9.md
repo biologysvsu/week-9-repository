@@ -35,23 +35,26 @@ Your sample ID is `BB207` (the first column). You will use this sample ID in you
 ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/asvs-tree.qza .
 ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/insertion-placements.qza .
 ```
+
 2. Generate rarefaction curves
 ```         
 qiime diversity alpha-rarefaction \
-  --i-table deblur_output/deblur_table_final.qza \
-  --p-max-depth 11000 \
-  --p-steps 20 \
-  --i-phylogeny asvs-tree.qza \
-  --o-visualization rarefaction_curves.qzv
+  --i-table deblur_output/deblur_table_final.qza\
+  --p-max-depth 7000 \
+  --p-steps 20\
+  --o-visualization deblur_output/rarefaction_curves_no_tree.qzv
 ```
+- p-max-depth or sample depth is how many sequences (reads) from each sample will be used for comparison. We want to set this value to 7000 since the sample with fewest reads has 7704.
+- p-steps 20 means that QIIME 2 will test 20 different sequencing depths when generating a rarefaction curve. QIIME 2 will analyze your data at 20 different depths from a low number (e.g., 250) up to 75000, to see how diversity changes.
+
 2. Calculating diversity metrics
 ```         
 qiime diversity core-metrics-phylogenetic \
   --i-table deblur_output/deblur_table_final.qza \
   --i-phylogeny asvs-tree.qza \
-  --p-sampling-depth X  \
+  --p-sampling-depth 7000  \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
-  --p-n-jobs-or-threads 4 \
+  --p-n-jobs 4 \
   --output-dir diversity
 ```
 3. Generate boxplot for shannon
@@ -67,5 +70,5 @@ qiime taxa barplot \
   --i-table deblur_output/deblur_table_final.qza \
   --i-taxonomy taxa/classification.qza \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
-  --o-visualization taxa/taxa_barplot.qzv
+  --o-visualization taxa_barplot.qzv
 ```
