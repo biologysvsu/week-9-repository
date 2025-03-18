@@ -49,7 +49,7 @@ qiime diversity core-metrics \
   --i-table deblur_output/deblur_table_final.qza \
   --p-sampling-depth 7000 \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
-  --p-n-jobs-or-threads 4 \
+  --p-n-jobs 4 \
   --output-dir diversity
 ```
 3. Generate boxplot for shannon
