@@ -28,7 +28,7 @@ ln -s /ocean/projects/agr250001p/shared/week-7-data/insertion-placements.qza .
 ```         
 qiime diversity alpha-rarefaction \
   --i-table deblur_output/deblur_table_final.qza \
-  --p-max-depth X \
+  --p-max-depth 10 \
   --p-steps 20 \
   --i-phylogeny asvs-tree.qza \
   --o-visualization rarefaction_curves.qzv
