@@ -44,7 +44,7 @@ qiime diversity core-metrics-phylogenetic \
   --p-n-jobs-or-threads 4 \
   --output-dir diversity
 ```
-3. Produce boxplot for shannon
+3. Generate boxplot for shannon
 ```         
 qiime diversity alpha-group-significance \
   --i-alpha-diversity diversity/shannon_vector.qza \
