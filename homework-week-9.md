@@ -39,7 +39,7 @@ qiime diversity alpha-rarefaction \
   --o-visualization deblur_output/rarefaction_curves_no_tree.qzv
 ```
 - p-max-depth or sample depth is how many sequences (reads) from each sample will be used for comparison. We want to set this value to 7000 since the sample with fewest reads has 7704.
-- p-steps 20 means that QIIME 2 will test 20 different sequencing depths when generating a rarefaction curve. QIIME 2 will analyze your data at 20 different depths from a low number (e.g., 250) up to 75000, to see how diversity changes.
+- p-steps 20 means that QIIME 2 will test 20 different sequencing depths when generating a rarefaction curve. QIIME 2 will analyze your data at 20 different depths from a low number (e.g., 250) up to 7000, to see how diversity changes.
 
 - You need to "add, commit and push `deblur_output/rarefaction_curves_no_tree.qzv`" to your forked week-7-repository, download the file, and visualize it in qiime view.
 
