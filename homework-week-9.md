@@ -32,8 +32,8 @@ Your sample ID is `BB207` (the first column). You will use this sample ID in you
 # VISUALIZATION (Homework)
 1. This is a phylogenetic tree I pre-generated, please create a symlink
 ```         
-ln -s /ocean/projects/agr250001p/shared/week-7-data/asvs-tree.qza .
-ln -s /ocean/projects/agr250001p/shared/week-7-data/insertion-placements.qza .
+ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/asvs-tree.qza .
+ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/insertion-placements.qza .
 ```
 2. Generate rarefaction curves
 ```         
