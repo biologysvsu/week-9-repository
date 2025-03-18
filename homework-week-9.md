@@ -7,9 +7,11 @@ cd week-7-repository
 - `ls` just in case to confirm you are in the right working directory
 
 # ACTIVATE CONDA ENVIRONMENT TO RUN QIIME2
-
-
-
+```
+module load anaconda3
+conda activate qiime2-amplicon-2024.2
+qiime --help
+```
 # VISUALIZATION (Homework)
 1. This is a phylogenetic tree I pre-generated, please create a symlink
 ```         
