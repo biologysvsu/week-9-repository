@@ -34,8 +34,6 @@ qiime diversity alpha-rarefaction \
   --i-phylogeny asvs-tree.qza \
   --o-visualization rarefaction_curves.qzv
 ```
-- Answer question 17
-
 2. Calculating diversity metrics
 ```         
 qiime diversity core-metrics-phylogenetic \
