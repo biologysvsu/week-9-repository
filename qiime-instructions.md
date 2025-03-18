@@ -32,7 +32,7 @@ mkdir fastqc_raw_data_out
 module load FastQC
 fastqc -t 4 raw_data/*.fastq.gz -o fastqc_raw_data_out
 ```
-4. Run multiqc
+4. Run multiqc (will not work if you activate conda environment first, in such case `conda deactivate` before running multiqc)
 ```
 multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
 ```
