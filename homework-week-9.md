@@ -49,12 +49,11 @@ qiime diversity alpha-rarefaction \
 
 2. Calculating diversity metrics
 ```         
-qiime diversity core-metrics-phylogenetic \
+qiime diversity core-metrics \
   --i-table deblur_output/deblur_table_final.qza \
-  --i-phylogeny asvs-tree.qza \
-  --p-sampling-depth 7000  \
+  --p-sampling-depth 7000 \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
-  --p-n-jobs 4 \
+  --p-n-jobs-or-threads 4 \
   --output-dir diversity
 ```
 3. Generate boxplot for shannon
