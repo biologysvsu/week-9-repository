@@ -76,7 +76,7 @@ mkdir reads_qza
 2. You had installed the latest version of QIIME2, so you can either activate that environment with the command below.
 
 ```
-module load anaconda 3        
+module load anaconda3        
 conda activate qiime2-amplicon-2024.2
 ```
 - When you are finished with this tutorial you can deactivate the environment using:
