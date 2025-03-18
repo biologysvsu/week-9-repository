@@ -1,7 +1,9 @@
 # YOU NEED AN ACTIVE CONDA ENVIRONMENT TO RUN QIIME!
 # GO TO WORKING DIRECTORY
 ```
-my ocean
+myocean
+#If you do not have an alias, you should go to your ocean folder using:
+#cd /ocean/projects/agr250001p/your-username/week-7-repository
 cd week-7-repository
 ```
 - `ls` just in case to confirm you are in the right working directory. You should get something like this:
