@@ -18,6 +18,17 @@ README.md                       filt_stats.qza       multiqc_mock.html          
 module load anaconda3
 conda activate qiime2-amplicon-2024.2
 ```
+# Generate random sample you will work with
+```
+shuf -n 1 Blueberry_metadata_reduced.tsv
+```
+- This command will randomly select one sample from the dataset.
+- Your output should look something like this:
+```
+BB207   Rhizosphere     Forest
+```
+Your sample ID is `BB207` (the first column). You will use this sample ID in your analysis.
+
 # VISUALIZATION (Homework)
 1. This is a phylogenetic tree I pre-generated, please create a symlink
 ```         
@@ -28,7 +39,7 @@ ln -s /ocean/projects/agr250001p/shared/week-7-data/insertion-placements.qza .
 ```         
 qiime diversity alpha-rarefaction \
   --i-table deblur_output/deblur_table_final.qza \
-  --p-max-depth 10 \
+  --p-max-depth 11000 \
   --p-steps 20 \
   --i-phylogeny asvs-tree.qza \
   --o-visualization rarefaction_curves.qzv
