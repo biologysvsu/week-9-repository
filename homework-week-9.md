@@ -23,20 +23,14 @@ conda activate qiime2-amplicon-2024.2
 shuf -n 1 Blueberry_metadata_reduced.tsv
 ```
 - This command will randomly select one sample from the dataset.
-- Your output should look something like this:
+- Make sure you get a screenshot to include in your homework. Your output should look something like this:
 ```
 BB207   Rhizosphere     Forest
 ```
-Your sample ID is `BB207` (the first column). You will use this sample ID in your analysis.
+Your sample ID is `BB207` (the first column). You will use this sample ID in your homework analysis.
 
 # VISUALIZATION (Homework)
-1. This is a phylogenetic tree I pre-generated, please create a symlink
-```         
-ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/asvs-tree.qza .
-ln -s /ocean/projects/agr250001p/shared/week-7-data/BMB_data/insertion-placements.qza .
-```
-
-2. Generate rarefaction curves
+1. Generate rarefaction curves
 ```         
 qiime diversity alpha-rarefaction \
   --i-table deblur_output/deblur_table_final.qza\
@@ -46,6 +40,8 @@ qiime diversity alpha-rarefaction \
 ```
 - p-max-depth or sample depth is how many sequences (reads) from each sample will be used for comparison. We want to set this value to 7000 since the sample with fewest reads has 7704.
 - p-steps 20 means that QIIME 2 will test 20 different sequencing depths when generating a rarefaction curve. QIIME 2 will analyze your data at 20 different depths from a low number (e.g., 250) up to 75000, to see how diversity changes.
+
+- You need to "add, commit and push `deblur_output/rarefaction_curves_no_tree.qzv`" to your forked week-7-repository, download the file, and visualize it in qiime view.
 
 2. Calculating diversity metrics
 ```         
@@ -63,6 +59,8 @@ qiime diversity alpha-group-significance \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
   --o-visualization diversity/shannon_compare_groups.qzv
 ```
+- You need to "add, commit and push `diversity/shannon_compare_groups.qzv`" to your forked week-7-repository, download the file, and visualize it in qiime view.
+
 4. Generate stacked bar chart of taxa relative abundances
 ```         
 qiime taxa barplot \
@@ -71,3 +69,4 @@ qiime taxa barplot \
   --m-metadata-file Blueberry_metadata_reduced.tsv \
   --o-visualization taxa_barplot.qzv
 ```
+- You need to "add, commit and push `taxa_barplot.qzv`" to your forked week-7-repository, download the file, and visualize it in qiime view.
