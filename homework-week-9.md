@@ -4,7 +4,12 @@
 my ocean
 cd week-7-repository
 ```
-- `ls` just in case to confirm you are in the right working directory
+- `ls` just in case to confirm you are in the right working directory. You should get something like this:
+```
+Blueberry_metadata_reduced.tsv  fastqc_mock_out      microbiome-instructions.md  multiqc_mock_data
+MultiQC                         fastqc_raw_data_out  mock-data                   raw_data
+README.md                       filt_stats.qza       multiqc_mock.html           reads_qza
+```
 
 # ACTIVATE CONDA ENVIRONMENT TO RUN QIIME2
 ```
