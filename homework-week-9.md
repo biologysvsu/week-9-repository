@@ -17,7 +17,6 @@ README.md                       filt_stats.qza       multiqc_mock.html          
 ```
 module load anaconda3
 conda activate qiime2-amplicon-2024.2
-qiime --help
 ```
 # VISUALIZATION (Homework)
 1. This is a phylogenetic tree I pre-generated, please create a symlink
