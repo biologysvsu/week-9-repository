@@ -34,6 +34,7 @@ fastqc -t 4 raw_data/*.fastq.gz -o fastqc_raw_data_out
 ```
 4. Run multiqc (will not work if you activate conda environment first, in such case `conda deactivate` before running multiqc)
 ```
+module load python/3.8.6
 multiqc --dirs fastqc_raw_data_out --filename multiqc_raw_data.html
 ```
 
